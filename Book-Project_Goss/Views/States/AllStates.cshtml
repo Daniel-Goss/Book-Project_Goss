@@ -1,0 +1,52 @@
+﻿@model List<Book_Project_Goss.Models.State>
+@{
+    ViewBag.Title = "AllStates";
+}
+
+<h2>AllStates</h2>
+
+<div class="Ultility container">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="searchBar" />
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-info" onclick="apiHandler.GET('/States/StateUpsert/')">Add New</button>
+
+<div id="searchFilters" class="hidden">
+    <label>All</label><input type="radio" name="filters" value="All" checked />
+    <label>Code</label><input type="radio" name="filters" value="Code" />
+    <label>Name</label><input type="radio" name="filters" value="Name" />
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th onclick="sortable.sort(0)">Code</th>
+            <th onclick="sortable.sort(1)">Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var state in Model)
+        {
+            <tr>
+                <td>@state.StateCode</td>
+                <td>@state.StateName</td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/States/StateUpsert/@state.StateCode')">Add New</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    sortable.URL = '/States/AlLStates/';
+</script>

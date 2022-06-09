@@ -1,0 +1,59 @@
+﻿@model List<Book_Project_Goss.Models.Customer>
+@{
+    ViewBag.Title = "AllCustomers";
+}
+
+<h2>Customers</h2>
+
+<div class="Ultility container">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="searchBar" />
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-info" onclick="apiHandler.GET('/Customer/CustomerUpsert/0')">Add New</button>
+
+<div id="searchFilters" class="hidden">
+    <label>All</label><input type="radio" name="filters" value="All" checked />
+    <label>ID</label><input type="radio" name="filters" value="Id" />
+    <label>Name</label><input type="radio" name="filters" value="Name" />
+    <label>State</label><input type="radio" name="filters" value="State" />
+    <label>Address</label><input type="radio" name="filters" value="Address" />
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th onclick="sortable.sort(0)">ID</th>
+            <th onclick="sortable.sort(1)">Name</th>
+            <th onclick="sortable.sort(2)">State</th>
+            <th onclick="sortable.sort(3)">Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>@cust.CustomerID</td>
+                <td>@cust.Name</td>
+                <td>@cust.State</td>
+                <td>@cust.Address</td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/Customer/CustomerUpsert/@cust.CustomerID')">Edit</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    sortable.URL = '/Customer/AllCustomers/'
+</script>
+

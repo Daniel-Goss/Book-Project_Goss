@@ -1,0 +1,34 @@
+﻿body {
+}
+
+.hidden {
+    display: none;
+}
+
+.upsertText {
+    display: inline !important;
+}
+
+#custName{
+    margin-right: 28px;
+}
+
+#custAddress {
+    margin-right: 10px;
+}
+
+#custCity {
+    margin-right: 40px;
+}
+
+#custState {
+    margin-right: 32px;
+}
+
+#custZip {
+    margin-right: 8px;
+}
+
+.cust {
+    margin-bottom: 20px;
+}

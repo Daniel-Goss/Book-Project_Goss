@@ -1,0 +1,29 @@
+﻿@model Book_Project_Goss.Models.Product
+@{
+    ViewBag.Title = "ProductUpsert";
+}
+
+<h2>ProductUpsert</h2>
+
+@using (Html.BeginForm("ProductUpsert", "Product", FormMethod.Post))
+{
+
+    <div class="cust">
+        <label id="stateCode">Code: </label>
+        @Html.TextBoxFor(p => p.ProductCode, new { @class = "form-control upsertText", })
+    </div>
+    <div class="cust">
+        <label id="stateName">Description: </label>
+        @Html.TextBoxFor(p => p.Description, new { @class = "form-control upsertText",  })
+    </div>
+    <div class="cust">
+        <label id="stateName">Quantity: </label>
+        @Html.TextBoxFor(p => p.OnHandQuantity, new { @class = "form-control upsertText",  type = "number"})
+    </div>
+    <div class="cust">
+        <label id="stateName">UnitPrice: </label>
+        @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control upsertText",  type = "number"})
+    </div>
+
+    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Product/ProductUpsert/@Model.ProductCode', @Model)">Confirm</button>
+}

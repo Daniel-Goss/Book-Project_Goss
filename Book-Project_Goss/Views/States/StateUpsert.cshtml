@@ -1,0 +1,23 @@
+﻿@model Book_Project_Goss.Models.State
+@{
+    ViewBag.Title = "StateUpsert";
+}
+
+<h2>StateUpsert</h2>
+
+@using (Html.BeginForm("StateUpsert", "States", FormMethod.Post))
+{
+
+    <div class="cust">
+        <label id="stateCode">Name: </label>
+        @Html.TextBoxFor(s => s.StateCode, new { @class = "form-control upsertText", })
+    </div>
+    <div class="cust">
+        <label id="stateName">Address: </label>
+        @Html.TextBoxFor(s => s.StateName, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
+    </div>
+
+    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/States/StateUpsert/@Model.StateCode', @Model)">Confirm</button>
+}
+
+

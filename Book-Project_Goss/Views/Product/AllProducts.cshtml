@@ -1,0 +1,55 @@
+﻿@model List<Book_Project_Goss.Models.Product>
+@{
+    ViewBag.Title = "AllProducts";
+}
+
+<h2>AllProducts</h2>
+
+<div class="Ultility container">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="searchBar" />
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+        </div>
+    </div>
+</div>
+
+<div id="searchFilters" class="hidden">
+    <label>All</label><input type="radio" name="filters" value="All" checked />
+    <label>Code</label><input type="radio" name="filters" value="Code" />
+    <label>Description</label><input type="radio" name="filters" value="Des" />
+    <label>Unit Price</label><input type="radio" name="filters" value="UnPrice" />
+    <label>Quantity</label><input type="radio" name="filters" value="Quant" />
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th onclick="sortable.sort(0)">Code</th>
+            <th onclick="sortable.sort(1)">Description</th>
+            <th onclick="sortable.sort(2)">Unit Price</th>
+            <th onclick="sortable.sort(3)">On Hand</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prod in Model)
+        {
+            <tr>
+                <td>@prod.ProductCode</td>
+                <td>@prod.Description</td>
+                <td>@prod.UnitPrice.ToString("c")</td>
+                <td>@prod.OnHandQuantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    sortable.URL = '/Product/AllProducts/';
+</script>
+

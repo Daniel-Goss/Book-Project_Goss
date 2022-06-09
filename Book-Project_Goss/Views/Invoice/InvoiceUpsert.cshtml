@@ -1,0 +1,42 @@
+﻿@model Book_Project_Goss.Models.InvoiceUpsertModel
+@{
+    ViewBag.Title = "InvoiceUpsert";
+}
+
+<h2>InvoiceUpsert</h2>
+
+@using (Html.BeginForm("CustomerUpsert", "Customer", FormMethod.Post))
+{
+    @Html.HiddenFor(i => i.Invoice.InvoiceID);
+    <br />
+    <div class="cust">
+        <label id="custName">Name: </label>
+        @Html.TextBoxFor(i => i.Invoice.InvoiceDate, new { @class = "form-control upsertText", type = "date" })
+    </div>
+    <div class="cust">
+        <label id="custState">Customer: </label>
+        <input list="customers" name="Invoice.Customer_Id" class="form-control upsertText" />
+        <datalist id="customers">
+            @foreach (var cust in Model.CustomerList)
+            {
+                <option value="@cust.CustomerID">@cust.Name</option>
+            }
+        </datalist>
+    </div>
+@*    <div class="cust">
+        <label id="custAddress">Address: </label>
+        @Html.TextBoxFor(c => c.Invoice., new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
+    </div>
+    <div class="cust">
+        <label id="custCity">City: </label>
+        @Html.TextBoxFor(c => c.Customer.City, new { @class = "form-control upsertText", placeholder = "City", id = "city" })
+    </div>
+    <div class="cust">
+        <label id="custZip">Zip Code: </label>
+        @Html.TextBoxFor(c => c.Customer.ZipCode, new { @class = "form-control upsertText", placeholder = "Zip Code", id = "zipcode" })
+    </div>
+    <label>Location Quick Select:</label>
+    <div class="autocomplete-container" id="autocomplete-container"></div>*@
+
+    <input type="submit" class="btn btn-info" value="Upsert Customer" />
+}

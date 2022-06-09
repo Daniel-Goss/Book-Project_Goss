@@ -1,0 +1,58 @@
+﻿@model List<Book_Project_Goss.Models.Invoice>
+@{
+    ViewBag.Title = "AllInvoices";
+}
+
+<h2>Invoices</h2>
+
+<div class="Ultility container">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="searchBar" />
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+        </div>
+    </div>
+</div>
+
+<div id="searchFilters" class="hidden">
+    <label>All</label><input type="radio" name="filters" value="All" checked />
+    <label>ID</label><input type="radio" name="filters" value="Id" />
+    <label>Product Total</label><input type="radio" name="filters" value="ProTotal" />
+    <label>Invoice Total</label><input type="radio" name="filters" value="InTotal" />
+    <label>Tax</label><input type="radio" name="filters" value="Tax" />
+    <label>Date</label><input type="radio" name="filters" value="date" />
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th onclick="sortable.sort(0)">ID</th>
+            <th onclick="sortable.sort(1)">Product Total</th>
+            <th onclick="sortable.sort(2)">Tax</th>
+            <th onclick="sortable.sort(3)">Invoice Total</th>
+            <th onclick="sortable.sort(4)">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invo in Model)
+        {
+            <tr>
+                <td>@invo.InvoiceID</td>
+                <td>@invo.ProductTotal.ToString("c")</td>
+                <td>@invo.SalesTax.ToString("c")</td>
+                <td>@invo.InvoiceTotal.ToString("c")</td>
+                <td>@invo.InvoiceDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    sortable.URL = '/Invoice/AllInvoices/';
+</script>
+
