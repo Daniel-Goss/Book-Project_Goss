@@ -41,7 +41,8 @@
             <tr>
                 <td>@state.StateCode</td>
                 <td>@state.StateName</td>
-                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/States/StateUpsert/@state.StateCode')">Add New</button></td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/States/StateUpsert/@state.StateCode')">Add New</button>
+                    <button type="button" class="btn btn-danger" onclick="apiHandler.GET('/States/StateDelete/@state.StateCode')">Delete</button></td>
             </tr>
         }
     </tbody>

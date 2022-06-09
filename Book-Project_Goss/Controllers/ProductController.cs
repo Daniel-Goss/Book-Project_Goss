@@ -72,6 +72,9 @@ namespace BookProject.Controllers
             {
                 products = SearchProducts(id, filter, products);
             }
+
+            products = products.Where(p => p.IsDeleted == false).ToList();
+
             return View(products);
         }
 
@@ -104,12 +107,33 @@ namespace BookProject.Controllers
                     check.Description = product.Description;
                     check.OnHandQuantity = product.OnHandQuantity;
                     check.UnitPrice = product.UnitPrice;
+                    check.IsDeleted = false;
                 }
                 else
                 {
                     context.Products.Add(product);
                 }
 
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllProducts");
+        }
+
+        [HttpGet]
+        public ActionResult ProductDelete(string id)
+        {
+            BooksEntities context = new BooksEntities();
+
+            try
+            {
+                Product product = context.Products.Where(p => p.ProductCode == id).FirstOrDefault();
+                product.IsDeleted = true;
                 context.SaveChanges();
             }
             catch (Exception er)

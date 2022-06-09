@@ -49,6 +49,8 @@ namespace BookProject.Controllers
                 states = SearchStates(id, filter, states);
             }
 
+            states = states.Where(s => s.IsDeleted == false).ToList();
+
             return View(states);
         }
 
@@ -79,12 +81,33 @@ namespace BookProject.Controllers
                     var check = context.States.Where(s => s.StateCode == state.StateCode).FirstOrDefault();
 
                     check.StateName = state.StateName;
+                    check.IsDeleted = false;
                 }
                 else
                 {
                     context.States.Add(state);
                 }
 
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllStates");
+        }
+
+        [HttpGet]
+        public ActionResult StateDelete(string id)
+        {
+            BooksEntities context = new BooksEntities();
+
+            try
+            {
+                State state = context.States.Where(s => s.StateCode == id).FirstOrDefault();
+                state.IsDeleted = true;
                 context.SaveChanges();
             }
             catch (Exception er)

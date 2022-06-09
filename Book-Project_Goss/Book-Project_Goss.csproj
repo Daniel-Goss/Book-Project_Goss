@@ -241,7 +241,6 @@
     <Content Include="Views\States\AllStates.cshtml" />
     <Content Include="Views\Calc\Multiply.cshtml" />
     <Content Include="Views\Customer\CustomerUpsert.cshtml" />
-    <Content Include="Views\Customer\BadState.cshtml" />
     <Content Include="Views\States\StateUpsert.cshtml" />
     <Content Include="Views\Invoice\InvoiceUpsert.cshtml" />
     <Content Include="Views\Product\ProductUpsert.cshtml" />

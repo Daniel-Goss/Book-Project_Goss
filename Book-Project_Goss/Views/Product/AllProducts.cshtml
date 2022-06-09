@@ -47,7 +47,8 @@
                 <td>@prod.Description</td>
                 <td>@prod.UnitPrice.ToString("c")</td>
                 <td>@prod.OnHandQuantity</td>
-                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/Product/ProductUpsert/@prod.ProductCode')">Add New</button></td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/Product/ProductUpsert/@prod.ProductCode')">Add New</button>
+                    <button type="button" class="btn btn-danger" onclick="apiHandler.GET('/Product/ProductDelete/@prod.ProductCode')">Delete</button></td>
             </tr>
         }
     </tbody>

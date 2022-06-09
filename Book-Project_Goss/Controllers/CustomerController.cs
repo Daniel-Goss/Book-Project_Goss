@@ -67,20 +67,14 @@ namespace BookProject.Controllers
                     }
             }
 
-            customers = customers.Where(c => c.IsDeleted == false).ToList();
-
             if (id != null)
             {
                 customers = CustomerSearch(id, filter, customers);
-
             }
-            return View(customers);
-        }
 
-        [HttpGet]
-        public ActionResult BadState()
-        {
-            return View();
+            customers = customers.Where(c => c.IsDeleted == false).ToList();
+
+            return View(customers);
         }
 
         [HttpGet]
@@ -120,6 +114,7 @@ namespace BookProject.Controllers
                     check.Name = customer.Name;
                     check.State = customer.State;
                     check.ZipCode = customer.ZipCode;
+                    check.IsDeleted = false;
                 }
                 else
                 {
