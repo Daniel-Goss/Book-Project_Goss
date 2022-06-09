@@ -92,7 +92,6 @@ namespace BookProject.Controllers
         [HttpPost]
         public ActionResult ProductUpsert(Product product)
         {
-            //gamer
             BooksEntities context = new BooksEntities();
 
             try

@@ -67,7 +67,9 @@ namespace BookProject.Controllers
                     }
             }
 
-            if(id != null)
+            customers = customers.Where(c => c.IsDeleted == false).ToList();
+
+            if (id != null)
             {
                 customers = CustomerSearch(id, filter, customers);
 
@@ -124,6 +126,27 @@ namespace BookProject.Controllers
                     context.Customers.Add(customer);
                 }
 
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllCustomers");
+        }
+
+
+        [HttpGet]
+        public ActionResult CustomerDelete(int id)
+        {
+            BooksEntities context = new BooksEntities();
+
+            try
+            {
+                Customer customer = context.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
+                customer.IsDeleted = true;
                 context.SaveChanges();
             }
             catch (Exception er)

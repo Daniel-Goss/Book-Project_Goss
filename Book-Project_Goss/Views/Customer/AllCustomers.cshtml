@@ -47,7 +47,8 @@
                 <td>@cust.Name</td>
                 <td>@cust.State</td>
                 <td>@cust.Address</td>
-                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/Customer/CustomerUpsert/@cust.CustomerID')">Edit</button></td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/Customer/CustomerUpsert/@cust.CustomerID')">Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="apiHandler.GET('/Customer/CustomerDelete/@cust.CustomerID')">Delete</button></td>
             </tr>
         }
     </tbody>

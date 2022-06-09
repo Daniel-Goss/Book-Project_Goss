@@ -22,7 +22,7 @@
     </div>
     <div class="cust">
         <label id="stateName">UnitPrice: </label>
-        @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control upsertText",  type = "number"})
+        @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control upsertText",  type = "number", step = ".01"})
     </div>
 
     <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Product/ProductUpsert/@Model.ProductCode', @Model)">Confirm</button>
