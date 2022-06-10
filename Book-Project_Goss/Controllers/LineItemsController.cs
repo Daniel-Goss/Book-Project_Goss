@@ -90,6 +90,59 @@ namespace BookProject.Controllers
         }
 
         [HttpGet]
+        public ActionResult LineItemUpsert(string prodID, int inID)
+        {
+            BooksEntities context = new BooksEntities();
+            LineItemUpsertModel model = new LineItemUpsertModel()
+            {
+                LineItem = context.InvoiceLineItems.Where(l => l.InvoiceID == inID && l.ProductCode == prodID).FirstOrDefault(),
+                ProductList = context.Products.ToList(),
+                InvoiceList = context.Invoices.ToList()
+            };
+
+            if (model.LineItem == null)
+            {
+                model.LineItem = new InvoiceLineItem();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult LineItemUpsert(LineItemUpsertModel model)
+        {
+            BooksEntities context = new BooksEntities();
+            InvoiceLineItem lineItem = model.LineItem;
+
+            try
+            {
+                if (context.InvoiceLineItems.Where(i => i.InvoiceID == lineItem.InvoiceID && i.ProductCode == lineItem.ProductCode).Count() > 0)
+                {
+                    //States already exists
+                    var check = context.InvoiceLineItems.Where(i => i.InvoiceID == lineItem.InvoiceID && i.ProductCode == lineItem.ProductCode).FirstOrDefault();
+
+                    check.ItemTotal = lineItem.ItemTotal;
+                    check.Quantity = lineItem.Quantity;
+                    check.UnitPrice = lineItem.UnitPrice;
+                    check.IsDeleted = false;
+                }
+                else
+                {
+                    context.InvoiceLineItems.Add(lineItem);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllLineItems");
+        }
+
+        [HttpGet]
         public ActionResult LineItemDelete(int inID, string prodID)
         {
             BooksEntities context = new BooksEntities();

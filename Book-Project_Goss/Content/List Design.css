@@ -1,14 +1,117 @@
 ﻿body {
+    background-color: rgb(22 155 255) !important;
+}
+
+#searchFilters input {
+    margin-left: 10px;
+    margin-right: 20px !important;
+}
+
+.search {
+    font-size: 18px !important;
+    width: 300px !important;
+    height: 40px !important;
+}
+
+#searchFilters {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+button {
+    font-size: 16px !important;
+}
+
+    #searchFilters label {
+        font-weight: bold;
+    }
+
+input {
+    border: solid thin black !important;
+}
+
+.thing {
+    margin-top: 20px;
+}
+
+.title {
+    width: 100%;
+    font-size: 50px;
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    text-decoration: underline;
+    padding: 20px;
 }
 
 .hidden {
     display: none;
 }
 
+.Ultility {
+    border: solid thick black;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
 .upsertText {
     display: inline !important;
 }
 
+.add {
+    float: right;
+    font-size: 22px !important;
+    font-weight: bold !important;
+    text-decoration: underline;
+    margin-bottom: 20px !important;
+    margin-right: 50px;
+}
+
+.btn {
+    border: solid 2px black !important;
+}
+
+button:hover {
+    background-color: darkblue !important;
+    color: lightgray !important;
+}
+
+table {
+    margin-top: 10px;
+    border: solid thick black;
+}
+
+table tr th{
+    background-color: rgb(251 231 151);
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+table tr th:hover {
+    cursor: pointer;
+}
+
+    table thead {
+        border-radius: 10px !important;
+        border-bottom: solid 3px black;
+    }
+
+table tr td {
+    background-color: lightblue;
+    font-size: 16px;
+}
+
+table tr:hover td {
+    background-color: lightgoldenrodyellow;
+}
+
+
+
+/*upsert margins*/
 #custName{
     margin-right: 28px;
 }
@@ -29,6 +132,72 @@
     margin-right: 8px;
 }
 
+#inCust {
+    margin-right: 30px;
+}
+
+#inDate {
+    margin-right: 14px;
+}
+
+#inProd {
+    margin-right: 7px;
+}
+
+#inShip {
+    margin-right: 37px;
+}
+
+#inTax {
+    margin-right: 73px;
+}
+
+#inTotal {
+    margin-right: 64px;
+}
+
+#prodCode {
+    margin-right: 57px;
+}
+
+#prodDes {
+    margin-right: 15px;
+}
+
+#prodQuan {
+    margin-right: 36px;
+}
+
+#prodUni {
+    margin-right: 32px;
+}
+
+#linePro {
+    margin-right: 40px;
+}
+
+#lineIn {
+    margin-right: 44px;
+}
+
+#lineItem {
+    margin-right: 27px;
+}
+
+#lineUni {
+    margin-right: 27px;
+}
+
+#lineQuan {
+    margin-right: 36px;
+}
+
+#stateCode {
+    margin-right: 35px;
+}
+#stateName {
+    margin-right: 32px;
+}
 .cust {
     margin-bottom: 20px;
 }

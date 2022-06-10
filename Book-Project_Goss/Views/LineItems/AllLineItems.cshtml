@@ -3,29 +3,32 @@
     ViewBag.Title = "AllLneItems";
 }
 
-<h2>AllLineItems</h2>
+<div class="Ultility">
+    <h2 class="title">Line Items</h2>
 
-<div class="Ultility container">
-    <div class="row">
-        <div class="col-md-2">
-            <input type="text" class="form-control" id="searchBar" />
-        </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+    <div class=" container">
+        <div class="row thing">
+            <div class="col-md-3">
+                <input type="text" class="form-control search" id="searchBar" />
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+            </div>
+            <button type="button" class="btn btn-info add" onclick="apiHandler.GET('/LineItems/LineItemUpsert/?inID=0&prodID=')">Add New</button>
         </div>
     </div>
-</div>
 
-<div id="searchFilters" class="hidden">
-    <label>All</label><input type="radio" name="filters" value="All" checked />
-    <label>ID</label><input type="radio" name="filters" value="Id" />
-    <label>Description</label><input type="radio" name="filters" value="Des" />
-    <label>Unit Price</label><input type="radio" name="filters" value="UnPrice" />
-    <label>Item total</label><input type="radio" name="filters" value="Total" />
-    <label>Quantity</label><input type="radio" name="filters" value="Quant" />
+    <div id="searchFilters" class="hidden">
+        <label>All:</label><input type="radio" name="filters" value="All" checked />
+        <label>ID:</label><input type="radio" name="filters" value="Id" />
+        <label>Description:</label><input type="radio" name="filters" value="Des" />
+        <label>Unit Price:</label><input type="radio" name="filters" value="UnPrice" />
+        <label>Item total:</label><input type="radio" name="filters" value="Total" />
+        <label>Quantity:</label><input type="radio" name="filters" value="Quant" />
+    </div>
 </div>
 
 <table class="table table-hover">
@@ -48,7 +51,8 @@
                 <td>@line.UnitPrice.ToString("c")</td>
                 <td>@line.Quantity</td>
                 <td>@line.ItemTotal.ToString("c")</td>
-                <td><button type="button" class="btn btn-danger" onclick="apiHandler.GET('/LineItems/LineItemDelete/?inID=@line.InvoiceID&prodID=@line.ProductCode')">Delete</button></td>
+                <td><button type="button" class="btn btn-info" onclick="apiHandler.GET('/LineItems/LineItemUpsert/?inID=@line.InvoiceID&prodID=@line.ProductCode')">Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="apiHandler.GET('/LineItems/LineItemDelete/?inID=@line.InvoiceID&prodID=@line.ProductCode')">Delete</button></td>
             </tr>
         }
     </tbody>

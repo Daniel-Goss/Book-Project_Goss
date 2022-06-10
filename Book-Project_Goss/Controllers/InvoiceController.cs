@@ -25,6 +25,18 @@ namespace BookProject.Controllers
                     {
                         if (isDesc == true)
                         {
+                            invoices = context.Invoices.OrderByDescending(i => i.Customer.Name).ToList();
+                        }
+                        else
+                        {
+                            invoices = context.Invoices.OrderBy(i => i.Customer.Name).ToList();
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (isDesc == true)
+                        {
                             invoices = context.Invoices.OrderByDescending(i => i.ProductTotal).ToList();
                         }
                         else
@@ -33,7 +45,7 @@ namespace BookProject.Controllers
                         }
                         break;
                     }
-                case 2:
+                case 3:
                     {
                         if (isDesc == true)
                         {
@@ -45,7 +57,7 @@ namespace BookProject.Controllers
                         }
                         break;
                     }
-                case 3:
+                case 4:
                     {
                         if (isDesc == true)
                         {
@@ -57,7 +69,7 @@ namespace BookProject.Controllers
                         }
                         break;
                     }
-                case 4:
+                case 5:
                     {
                         if (isDesc == true)
                         {
@@ -115,7 +127,7 @@ namespace BookProject.Controllers
         public ActionResult InvoiceUpsert(InvoiceUpsertModel model)
         {
             BooksEntities context = new BooksEntities();
-            Invoice invoice = model.Invoice;
+            Invoice invoice = CalculateIvoice(model.Invoice);
 
             try
             {
@@ -145,6 +157,27 @@ namespace BookProject.Controllers
             }
 
             return RedirectToAction("AllInvoices");
+        }
+        
+        /// <summary>
+        ///     Calculates the totals for the updated / added invoice
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        private Invoice CalculateIvoice(Invoice invoice)
+        {
+            BooksEntities context = new BooksEntities();
+
+            List<InvoiceLineItem> items = context.InvoiceLineItems.Where(i => i.InvoiceID == invoice.InvoiceID && i.IsDeleted == false).ToList();
+
+            invoice.ProductTotal = 0;
+            foreach (var item in items)
+            {
+                invoice.ProductTotal = invoice.ProductTotal + (item.ItemTotal * item.Quantity);
+            }
+
+            invoice.InvoiceTotal = invoice.ProductTotal + invoice.Shipping + invoice.SalesTax;
+            return invoice;
         }
 
         [HttpGet]
@@ -185,7 +218,8 @@ namespace BookProject.Controllers
                 else
                 {
                     invoices = invoices.Where(i =>
-                        i.InvoiceDate.ToString().ToLower().Contains(id)).ToList();
+                        i.InvoiceDate.ToString().ToLower().Contains(id) ||
+                        i.Customer.Name.ToLower().Contains(id)).ToList();
                 }
             }
             else if (filter == "Id")
@@ -194,6 +228,11 @@ namespace BookProject.Controllers
 
                 invoices = invoices.Where(c =>
                     c.InvoiceID.ToString().Contains(id.ToString())).ToList();
+            }
+            else if (filter == "Cust")
+            {
+                invoices = invoices.Where(c =>
+                    c.Customer.Name.ToLower().Contains(id.ToString())).ToList();
             }
             else if (filter == "ProTotal")
             {
@@ -219,7 +258,7 @@ namespace BookProject.Controllers
             else if (filter == "Date")
             {
                 invoices = invoices.Where(c =>
-                    c.InvoiceDate.ToString().Contains(id.ToString())).ToList();
+                    c.InvoiceDate.ToString().ToLower().Contains(id.ToString())).ToList();
             }
 
             return invoices;

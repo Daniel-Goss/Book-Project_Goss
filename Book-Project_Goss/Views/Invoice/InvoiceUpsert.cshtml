@@ -3,19 +3,15 @@
     ViewBag.Title = "InvoiceUpsert";
 }
 
-<h2>InvoiceUpsert</h2>
+<h2 class="title">Add / Update an Invoice</h2>
 
-@using (Html.BeginForm("CustomerUpsert", "Customer", FormMethod.Post))
+@using (Html.BeginForm("InvoiceUpsert", "Invoice", FormMethod.Post))
 {
-    @Html.HiddenFor(i => i.Invoice.InvoiceID);
+    @Html.HiddenFor(i => i.Invoice.InvoiceID)
     <br />
     <div class="cust">
-        <label id="custName">Name: </label>
-        @Html.TextBoxFor(i => i.Invoice.InvoiceDate, new { @class = "form-control upsertText", type = "date" })
-    </div>
-    <div class="cust">
-        <label id="custState">Customer: </label>
-        <input list="customers" name="Invoice.Customer_Id" class="form-control upsertText" />
+        <label id="inCust">Customer: </label>
+        <input list="customers" name="Invoice.CustomerId" class="form-control upsertText" value="@Model.Invoice.CustomerID"/>
         <datalist id="customers">
             @foreach (var cust in Model.CustomerList)
             {
@@ -23,20 +19,28 @@
             }
         </datalist>
     </div>
-@*    <div class="cust">
-        <label id="custAddress">Address: </label>
-        @Html.TextBoxFor(c => c.Invoice., new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
+    <div class="cust">
+        <label id="inDate">Invoice Date: </label>
+        @Html.TextBoxFor(i => i.Invoice.InvoiceDate, new { @class = "form-control upsertText", type = "date"})
     </div>
     <div class="cust">
-        <label id="custCity">City: </label>
-        @Html.TextBoxFor(c => c.Customer.City, new { @class = "form-control upsertText", placeholder = "City", id = "city" })
+        <label id="inProd">Product Total: </label>
+        @Html.TextBoxFor(i => i.Invoice.ProductTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
     </div>
     <div class="cust">
-        <label id="custZip">Zip Code: </label>
-        @Html.TextBoxFor(c => c.Customer.ZipCode, new { @class = "form-control upsertText", placeholder = "Zip Code", id = "zipcode" })
+        <label id="inTax">Tax: </label>
+        @Html.TextBoxFor(i => i.Invoice.SalesTax, new { @class = "form-control upsertText", type = "number", step = ".01" })
     </div>
-    <label>Location Quick Select:</label>
-    <div class="autocomplete-container" id="autocomplete-container"></div>*@
+    <div class="cust">
+        <label id="inShip">Shipping: </label>
+        @Html.TextBoxFor(i => i.Invoice.Shipping, new { @class = "form-control upsertText", type = "number", step = ".01" })
+    </div>
+    <div class="cust">
+        <label id="inTotal">Total: </label>
+        @Html.TextBoxFor(i => i.Invoice.InvoiceTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
+    </div>
 
-    <input type="submit" class="btn btn-info" value="Upsert Customer" />
+
+    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Invoice/InvoiceUpsert/@Model.Invoice.InvoiceID', @Model.Invoice)">Confirm</button>
+    <button type="button" class="btn btn-info" onclick="apiHandler.GET('/LineItems/LineItemUpsert/?inID=@Model.Invoice.InvoiceID&prodID=')">Add Item</button>
 }

@@ -136,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LineItemUpsertModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -244,6 +245,7 @@
     <Content Include="Views\States\StateUpsert.cshtml" />
     <Content Include="Views\Invoice\InvoiceUpsert.cshtml" />
     <Content Include="Views\Product\ProductUpsert.cshtml" />
+    <Content Include="Views\LineItems\LineItemUpsert.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

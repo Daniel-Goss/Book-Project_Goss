@@ -1,0 +1,45 @@
+﻿@model Book_Project_Goss.Models.LineItemUpsertModel
+@{
+    ViewBag.Title = "LineItemUpsert";
+}
+
+<h2 class="title">LineItemUpsert</h2>
+
+@using (Html.BeginForm("LineItemUpsert", "LineItems", FormMethod.Post))
+{
+    <div class="cust">
+        <label id="linePro">Product: </label>
+        <input list="product" name="LineItem.ProductCode" class="form-control upsertText" value="@Model.LineItem.ProductCode"/>
+        <datalist id="product">
+            @foreach (var prod in Model.ProductList)
+            {
+                <option value="@prod.ProductCode">@prod.Description</option>
+            }
+        </datalist>
+    </div>
+    <div class="cust">
+        <label id="lineIn">Invoice: </label>
+        <input list="invoice" name="LineItem.InvoiceID" class="form-control upsertText" value="@Model.LineItem.InvoiceID"/>
+        <datalist id="invoice">
+            @foreach (var invo in Model.InvoiceList)
+            {
+                <option value="@invo.InvoiceID">@invo.Customer.Name</option>
+            }
+        </datalist>
+    </div>
+    <br />
+    <div class="cust">
+        <label id="lineItem">Item Total: </label>
+        @Html.TextBoxFor(l => l.LineItem.ItemTotal, new { @class = "form-control upsertText", type = "number", step = ".01"})
+    </div>
+    <div class="cust">
+        <label id="lineUni">Unit Price: </label>
+        @Html.TextBoxFor(l => l.LineItem.UnitPrice, new { @class = "form-control upsertText", type = "number", step = ".01" });
+    </div>
+    <div class="cust">
+        <label id="lineQuan">Quantity: </label>
+        @Html.TextBoxFor(l => l.LineItem.Quantity, new { @class = "form-control upsertText", type = "number" })
+    </div>
+
+    <input type="submit" class="btn btn-info" value="Confirm"/>
+}

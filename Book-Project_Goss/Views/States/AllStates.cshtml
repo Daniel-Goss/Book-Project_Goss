@@ -3,28 +3,29 @@
     ViewBag.Title = "AllStates";
 }
 
-<h2>AllStates</h2>
+<div class="Ultility">
+    <h2 class="title">Available States</h2>
 
-<div class="Ultility container">
-    <div class="row">
-        <div class="col-md-2">
-            <input type="text" class="form-control" id="searchBar" />
-        </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+    <div class=" container">
+        <div class="row thing">
+            <div class="col-md-3">
+                <input type="text" class="form-control search" id="searchBar" />
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-info" onclick="sortable.Search()">Search</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info" onclick="document.querySelector('#searchFilters').classList.toggle('hidden')">Filter Search</button>
+            </div>
+            <button type="button" class="btn btn-info add" onclick="apiHandler.GET('/States/StateUpsert/')">Add New</button>
         </div>
     </div>
-</div>
 
-<button type="button" class="btn btn-info" onclick="apiHandler.GET('/States/StateUpsert/')">Add New</button>
-
-<div id="searchFilters" class="hidden">
-    <label>All</label><input type="radio" name="filters" value="All" checked />
-    <label>Code</label><input type="radio" name="filters" value="Code" />
-    <label>Name</label><input type="radio" name="filters" value="Name" />
+    <div id="searchFilters" class="hidden">
+        <label>All:</label><input type="radio" name="filters" value="All" checked />
+        <label>Code:</label><input type="radio" name="filters" value="Code" />
+        <label>Name:</label><input type="radio" name="filters" value="Name" />
+    </div>
 </div>
 
 <table class="table table-hover">

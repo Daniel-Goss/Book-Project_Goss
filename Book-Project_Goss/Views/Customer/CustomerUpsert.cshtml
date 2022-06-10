@@ -5,7 +5,7 @@
 
 <link href="~/Content/AutocompleteDesign.css" rel="stylesheet" />
 
-<h2>CustomerUpsert</h2>
+<h2 class="title">CustomerUpsert</h2>
 
 <p>Create a new Customer or update an existing one. Use the autocomplete address lookup at the bottom to look for specific addresses and the info will be automatically put in. <br />
     State isnt automatically updated as the state needs to exist with or database, so we only have our existing areas available. click <a href="/States/StateUpsert/">here</a> to add a new state if needed</p>
@@ -43,7 +43,7 @@
     <label>Location Quick Select:</label>
     <div class="autocomplete-container" id="autocomplete-container"></div>
 
-    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Customer/CustomerUpsert/@Model.Customer.CustomerID', @Model.Customer)"></button>
+    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Customer/CustomerUpsert/@Model.Customer.CustomerID', @Model.Customer)">Confirm</button>
 }
 
 <script src="~/Content/GeoAPI.js"></script>

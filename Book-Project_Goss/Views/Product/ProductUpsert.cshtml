@@ -3,25 +3,25 @@
     ViewBag.Title = "ProductUpsert";
 }
 
-<h2>ProductUpsert</h2>
+<h2 class="title">ProductUpsert</h2>
 
 @using (Html.BeginForm("ProductUpsert", "Product", FormMethod.Post))
 {
 
     <div class="cust">
-        <label id="stateCode">Code: </label>
+        <label id="prodCode">Code: </label>
         @Html.TextBoxFor(p => p.ProductCode, new { @class = "form-control upsertText", })
     </div>
     <div class="cust">
-        <label id="stateName">Description: </label>
+        <label id="prodDes">Description: </label>
         @Html.TextBoxFor(p => p.Description, new { @class = "form-control upsertText",  })
     </div>
     <div class="cust">
-        <label id="stateName">Quantity: </label>
+        <label id="prodQuan">Quantity: </label>
         @Html.TextBoxFor(p => p.OnHandQuantity, new { @class = "form-control upsertText",  type = "number"})
     </div>
     <div class="cust">
-        <label id="stateName">UnitPrice: </label>
+        <label id="prodUni">UnitPrice: </label>
         @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control upsertText",  type = "number", step = ".01"})
     </div>
 

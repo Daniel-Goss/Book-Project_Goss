@@ -3,19 +3,21 @@
     ViewBag.Title = "StateUpsert";
 }
 
-<h2>StateUpsert</h2>
+<h2 class="title">StateUpsert</h2>
 
 @using (Html.BeginForm("StateUpsert", "States", FormMethod.Post))
 {
 
+<div>
     <div class="cust">
-        <label id="stateCode">Name: </label>
+        <label id="stateCode">Code: </label>
         @Html.TextBoxFor(s => s.StateCode, new { @class = "form-control upsertText", })
     </div>
     <div class="cust">
-        <label id="stateName">Address: </label>
+        <label id="stateName">Name: </label>
         @Html.TextBoxFor(s => s.StateName, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
     </div>
+</div>
 
     <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/States/StateUpsert/@Model.StateCode', @Model)">Confirm</button>
 }
