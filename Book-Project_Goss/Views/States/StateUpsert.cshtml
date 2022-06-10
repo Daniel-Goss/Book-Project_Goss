@@ -3,23 +3,23 @@
     ViewBag.Title = "StateUpsert";
 }
 
-<h2 class="title">StateUpsert</h2>
+<div class="jumbotron">
+    <h2 class="title">StateUpsert</h2>
 
-@using (Html.BeginForm("StateUpsert", "States", FormMethod.Post))
-{
+    <p>Add and Update the states and provinces that we will have available in our database. If there isnt a State that you live in, feel free to add it by giving the name and the Abreviated State Code below.</p>
 
-<div>
-    <div class="cust">
-        <label id="stateCode">Code: </label>
-        @Html.TextBoxFor(s => s.StateCode, new { @class = "form-control upsertText", })
-    </div>
-    <div class="cust">
-        <label id="stateName">Name: </label>
-        @Html.TextBoxFor(s => s.StateName, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
-    </div>
-</div>
-
-    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/States/StateUpsert/@Model.StateCode', @Model)">Confirm</button>
+    @using (Html.BeginForm("StateUpsert", "States", FormMethod.Post))
+    {
+        <div class="cust">
+            <label id="stateCode">Code: </label>
+            @Html.TextBoxFor(s => s.StateCode, new { @class = "form-control upsertText", })
+        </div>
+        <div class="cust">
+            <label id="stateName">Name: </label>
+            @Html.TextBoxFor(s => s.StateName, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
+        </div>
+        <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/States/StateUpsert/@Model.StateCode', @Model)">Confirm</button>
 }
+</div>
 
 

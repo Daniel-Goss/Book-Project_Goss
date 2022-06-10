@@ -5,46 +5,50 @@
 
 <link href="~/Content/AutocompleteDesign.css" rel="stylesheet" />
 
-<h2 class="title">CustomerUpsert</h2>
+<div class="jumbotron">
+    <h2 class="title">CustomerUpsert</h2>
 
-<p>Create a new Customer or update an existing one. Use the autocomplete address lookup at the bottom to look for specific addresses and the info will be automatically put in. <br />
-    State isnt automatically updated as the state needs to exist with or database, so we only have our existing areas available. click <a href="/States/StateUpsert/">here</a> to add a new state if needed</p>
+    <p>
+        Create a new Customer or update an existing one. Use the autocomplete address lookup at the bottom to look for specific addresses and the info will be automatically put in. <br />
+        State isnt automatically updated as the state needs to exist within our database, so we only have our existing areas available. click <a href="/States/StateUpsert/">here</a> to add a new state if needed
+    </p>
 
-@using (Html.BeginForm("CustomerUpsert", "Customer", FormMethod.Post))
-{
-    @Html.HiddenFor(c => c.Customer.CustomerID);
-    <br />
-    <div class="cust">
-        <label id="custName">Name: </label>
-        @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control upsertText", })
-    </div>
-    <div class="cust">
-        <label id="custAddress">Address: </label>
-        @Html.TextBoxFor(c => c.Customer.Address, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
-    </div>
-    <div class="cust">
-        <label id="custCity">City: </label>
-        @Html.TextBoxFor(c => c.Customer.City, new { @class = "form-control upsertText", placeholder = "City", id = "city" })
-    </div>
-    <div class="cust">
-        <label id="custState">State: </label>
-        <input list="states" name="Customer.State" class="form-control upsertText"/>
-        <datalist id="states">
-            @foreach (var states in Model.StateList)
-            {
-                <option value="@states.StateCode">@states.StateName</option>
-            }
-        </datalist>
-    </div>
-    <div class="cust">
-        <label id="custZip">Zip Code: </label>
-        @Html.TextBoxFor(c => c.Customer.ZipCode, new { @class = "form-control upsertText", placeholder = "Zip Code", id = "zipcode" })
-    </div>
-    <label>Location Quick Select:</label>
-    <div class="autocomplete-container" id="autocomplete-container"></div>
+    @using (Html.BeginForm("CustomerUpsert", "Customer", FormMethod.Post))
+    {
+        @Html.HiddenFor(c => c.Customer.CustomerID);
+        <br />
+        <div class="cust">
+            <label id="custName">Name: </label>
+            @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control upsertText", })
+        </div>
+        <div class="cust">
+            <label id="custAddress">Address: </label>
+            @Html.TextBoxFor(c => c.Customer.Address, new { @class = "form-control upsertText", placeholder = "Address", id = "address" })
+        </div>
+        <div class="cust">
+            <label id="custCity">City: </label>
+            @Html.TextBoxFor(c => c.Customer.City, new { @class = "form-control upsertText", placeholder = "City", id = "city" })
+        </div>
+        <div class="cust">
+            <label id="custState">State: </label>
+            <input list="states" name="Customer.State" class="form-control upsertText" />
+            <datalist id="states">
+                @foreach (var states in Model.StateList)
+                {
+                    <option value="@states.StateCode">@states.StateName</option>
+                }
+            </datalist>
+        </div>
+        <div class="cust">
+            <label id="custZip">Zip Code: </label>
+            @Html.TextBoxFor(c => c.Customer.ZipCode, new { @class = "form-control upsertText", placeholder = "Zip Code", id = "zipcode" })
+        </div>
+        <label>Location Quick Select:</label>
+        <div class="autocomplete-container" id="autocomplete-container"></div>
 
-    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Customer/CustomerUpsert/@Model.Customer.CustomerID', @Model.Customer)">Confirm</button>
-}
+        <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Customer/CustomerUpsert/@Model.Customer.CustomerID', @Model.Customer)">Confirm</button>
+    }
+</div>
 
 <script src="~/Content/GeoAPI.js"></script>
 

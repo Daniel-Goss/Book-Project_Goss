@@ -3,44 +3,50 @@
     ViewBag.Title = "InvoiceUpsert";
 }
 
-<h2 class="title">Add / Update an Invoice</h2>
+<div class="jumbotron">
+    <h2 class="title">Add / Update an Invoice</h2>
 
-@using (Html.BeginForm("InvoiceUpsert", "Invoice", FormMethod.Post))
-{
-    @Html.HiddenFor(i => i.Invoice.InvoiceID)
-    <br />
-    <div class="cust">
-        <label id="inCust">Customer: </label>
-        <input list="customers" name="Invoice.CustomerId" class="form-control upsertText" value="@Model.Invoice.CustomerID"/>
-        <datalist id="customers">
-            @foreach (var cust in Model.CustomerList)
-            {
-                <option value="@cust.CustomerID">@cust.Name</option>
-            }
-        </datalist>
-    </div>
-    <div class="cust">
-        <label id="inDate">Invoice Date: </label>
-        @Html.TextBoxFor(i => i.Invoice.InvoiceDate, new { @class = "form-control upsertText", type = "date"})
-    </div>
-    <div class="cust">
-        <label id="inProd">Product Total: </label>
-        @Html.TextBoxFor(i => i.Invoice.ProductTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
-    </div>
-    <div class="cust">
-        <label id="inTax">Tax: </label>
-        @Html.TextBoxFor(i => i.Invoice.SalesTax, new { @class = "form-control upsertText", type = "number", step = ".01" })
-    </div>
-    <div class="cust">
-        <label id="inShip">Shipping: </label>
-        @Html.TextBoxFor(i => i.Invoice.Shipping, new { @class = "form-control upsertText", type = "number", step = ".01" })
-    </div>
-    <div class="cust">
-        <label id="inTotal">Total: </label>
-        @Html.TextBoxFor(i => i.Invoice.InvoiceTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
-    </div>
+    <p>Make an invoice or update a currently existing one. Items inside invoices currently cannt be added to the invoice directly so to add an item click <a href="/LineItems/LineItemUpsert/?inID=@Model.Invoice.InvoiceID&prodID=">here</a>
+        or hit the Add Item button below. The price data also wont update untill the invoice is updated as the items will not be able to be updated till its edited, but we will be sure
+        to add that feature in the near future!</p>
+
+    @using (Html.BeginForm("InvoiceUpsert", "Invoice", FormMethod.Post))
+    {
+        @Html.HiddenFor(i => i.Invoice.InvoiceID)
+        <br />
+        <div class="cust">
+            <label id="inCust">Customer: </label>
+            <input list="customers" name="Invoice.CustomerId" class="form-control upsertText" value="@Model.Invoice.CustomerID" />
+            <datalist id="customers">
+                @foreach (var cust in Model.CustomerList)
+                {
+                    <option value="@cust.CustomerID">@cust.Name</option>
+                }
+            </datalist>
+        </div>
+        <div class="cust">
+            <label id="inDate">Invoice Date: </label>
+            @Html.TextBoxFor(i => i.Invoice.InvoiceDate, new { @class = "form-control upsertText", type = "date" })
+        </div>
+        <div class="cust">
+            <label id="inProd">Product Total: </label>
+            @Html.TextBoxFor(i => i.Invoice.ProductTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
+        </div>
+        <div class="cust">
+            <label id="inTax">Tax: </label>
+            @Html.TextBoxFor(i => i.Invoice.SalesTax, new { @class = "form-control upsertText", type = "number", step = ".01" })
+        </div>
+        <div class="cust">
+            <label id="inShip">Shipping: </label>
+            @Html.TextBoxFor(i => i.Invoice.Shipping, new { @class = "form-control upsertText", type = "number", step = ".01" })
+        </div>
+        <div class="cust">
+            <label id="inTotal">Total: </label>
+            @Html.TextBoxFor(i => i.Invoice.InvoiceTotal, new { @class = "form-control upsertText", type = "number", step = ".01", readOnly = true })
+        </div>
 
 
-    <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Invoice/InvoiceUpsert/@Model.Invoice.InvoiceID', @Model.Invoice)">Confirm</button>
-    <button type="button" class="btn btn-info" onclick="apiHandler.GET('/LineItems/LineItemUpsert/?inID=@Model.Invoice.InvoiceID&prodID=')">Add Item</button>
+        <button type="submit" class="btn btn-info" onclick="apiHandler.POST('/Invoice/InvoiceUpsert/@Model.Invoice.InvoiceID', @Model.Invoice)">Confirm</button>
+        <button type="button" class="btn btn-info" onclick="apiHandler.GET('/LineItems/LineItemUpsert/?inID=@Model.Invoice.InvoiceID&prodID=')">Add Item</button>
 }
+</div>
