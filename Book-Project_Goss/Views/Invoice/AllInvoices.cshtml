@@ -36,6 +36,7 @@
             <th onclick="sortable.sort(2)">Tax</th>
             <th onclick="sortable.sort(3)">Invoice Total</th>
             <th onclick="sortable.sort(4)">Date</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,7 @@
                 <td>@invo.SalesTax.ToString("c")</td>
                 <td>@invo.InvoiceTotal.ToString("c")</td>
                 <td>@invo.InvoiceDate</td>
+                <td><button type="button" class="btn btn-danger" onclick="apiHandler.GET('/Invoice/InvoiceDelete/@invo.InvoiceID')">Delete</button></td>
             </tr>
         }
     </tbody>

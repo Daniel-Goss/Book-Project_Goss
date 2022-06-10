@@ -88,6 +88,8 @@ namespace BookProject.Controllers
                 invoices = InvoiceSearch(id, filter, invoices);
             }
 
+            invoices = invoices.Where(i => i.IsDeleted == false).ToList();
+
             return View(invoices);
         }
 
@@ -134,6 +136,26 @@ namespace BookProject.Controllers
                     context.Invoices.Add(invoice);
                 }
 
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllInvoices");
+        }
+
+        [HttpGet]
+        public ActionResult InvoiceDelete(int id)
+        {
+            BooksEntities context = new BooksEntities();
+
+            try
+            {
+                Invoice invoice = context.Invoices.Where(i => i.InvoiceID == id).FirstOrDefault();
+                invoice.IsDeleted = true;
                 context.SaveChanges();
             }
             catch (Exception er)

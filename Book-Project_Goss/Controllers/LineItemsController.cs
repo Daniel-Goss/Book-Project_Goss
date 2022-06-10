@@ -84,7 +84,29 @@ namespace BookProject.Controllers
                 lineItems = SearchLineItems(id, filter, lineItems);
             }
 
+            lineItems = lineItems.Where(i => i.IsDeleted == false).ToList();
+
             return View(lineItems);
+        }
+
+        [HttpGet]
+        public ActionResult LineItemDelete(int inID, string prodID)
+        {
+            BooksEntities context = new BooksEntities();
+
+            try
+            {
+                InvoiceLineItem lineItem = context.InvoiceLineItems.Where(i => i.InvoiceID == inID && i.ProductCode == prodID).FirstOrDefault();
+                lineItem.IsDeleted = true;
+                context.SaveChanges();
+            }
+            catch (Exception er)
+            {
+
+                throw (er);
+            }
+
+            return RedirectToAction("AllLineItems");
         }
 
         private List<InvoiceLineItem> SearchLineItems(string id, string filter, List<InvoiceLineItem> lineItems)

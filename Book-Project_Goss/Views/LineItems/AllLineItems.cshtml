@@ -36,6 +36,7 @@
             <th onclick="sortable.sort(2)">Unit Price</th>
             <th onclick="sortable.sort(3)">Quantity</th>
             <th onclick="sortable.sort(4)">Total</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,7 @@
                 <td>@line.UnitPrice.ToString("c")</td>
                 <td>@line.Quantity</td>
                 <td>@line.ItemTotal.ToString("c")</td>
+                <td><button type="button" class="btn btn-danger" onclick="apiHandler.GET('/LineItems/LineItemDelete/?inID=@line.InvoiceID&prodID=@line.ProductCode')">Delete</button></td>
             </tr>
         }
     </tbody>
