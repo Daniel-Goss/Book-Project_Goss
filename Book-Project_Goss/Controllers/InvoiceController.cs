@@ -9,11 +9,15 @@ namespace BookProject.Controllers
 {
     public class InvoiceController : Controller
     {
-        // GET: Invoice
         /// <summary>
-        /// 
+        ///     Directs to a page the displays a list of Invoices. Allows the use of searching by all columns,
+        ///     or by specific columns and sorts either descending or ascending
         /// </summary>
-        /// <returns> List of Invoices </returns>
+        /// <param name="id"> search term - string </param>
+        /// <param name="filter"> selectd filter - string </param>
+        /// <param name="sortBy"> selected column - int </param>
+        /// <param name="isDesc"> sort direction - bool</param>
+        /// <returns></returns>
         public ActionResult AllInvoices(string id, string filter = "All", int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -105,6 +109,12 @@ namespace BookProject.Controllers
             return View(invoices);
         }
 
+        /// <summary>
+        ///     grabs a specific invoice by url and id, and redirects to an new page
+        ///     where an update can be preformed
+        /// </summary>
+        /// <param name="id"> invoice id - int </param>
+        /// <returns> Update page for invoices </returns>
         [HttpGet]
         public ActionResult InvoiceUpsert(int id)
         {
@@ -123,6 +133,12 @@ namespace BookProject.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Gets the updated info from the update page, adds the new invoice to the list 
+        ///     and returns the list page with the updated information
+        /// </summary>
+        /// <param name="model"> update model </param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult InvoiceUpsert(InvoiceUpsertModel model)
         {
@@ -180,6 +196,12 @@ namespace BookProject.Controllers
             return invoice;
         }
 
+        /// <summary>
+        ///     Soft deletes an invoice based on the id that is sent, and redirects back to 
+        ///     the list page with updated list of invoices
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> List View with updated invoices </returns>
         [HttpGet]
         public ActionResult InvoiceDelete(int id)
         {
@@ -200,6 +222,14 @@ namespace BookProject.Controllers
             return RedirectToAction("AllInvoices");
         }
 
+        /// <summary>
+        ///     Gets the sent id and filter and searches for invoices that match the
+        ///     search value and returns an updated list
+        /// </summary>
+        /// <param name="id"> Value being filtered </param>
+        /// <param name="filter"> Section being filtered </param>
+        /// <param name="invoices"> List of customers </param>
+        /// <returns> an updated list of invoices </returns>
         private List<Invoice> InvoiceSearch(string id, string filter, List<Invoice> invoices)
         {
             id = id.Trim().ToLower();

@@ -3,29 +3,39 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h2 class="title">Welcome To The BookStore!</h2>
+    <p>Welcome to our books store. We have a plethera of books that can be purchased for all you code studying needs and just your personal interests.</p>
+
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+        <h2>Customers</h2>
+        <p class="front">
+            All the customers that have curently purchased an item from our store. We appreaciate our customers greatly
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="/Customer/AllCustomers/">Customers &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-4 front">
+        <h2>Invoices</h2>
+        <p class="front">All the unvoices of the purchases that have been made for our products, click here to see all the past purchases that have been made</p>
+        <p><a class="btn btn-default" href="/Invoice/AllInvoices">Invoices &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-md-4 front">
+        <h2>States</h2>
+        <p class="front"> This is where all our current available States for purchasing are, We are always open to expanding our horizons farther if you want to update of location list</p>
+        <p><a class="btn btn-default" href="/States/AllStates/">States &raquo;</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 front">
+        <h2>Line item</h2>
+        <p class="front">This is where all the seperate items that have been added to purchases are found. You can add any amount of books to an invoice as long as the invoice exists</p>
+        <p><a class="btn btn-default" href="/LineItems/AllLineItems/">LineItems &raquo;</a></p>
+    </div>
+    <div class="col-md-6 front">
+        <h2>Products</h2>
+        <p class="front">All the products that we ave available at the moment will be located here, we are looking to increase our catalogue so look out for any updates to see what we bring next!</p>
+        <p><a class="btn btn-default" href="/Product/AllProducts/">Products &raquo;</a></p>
     </div>
 </div>

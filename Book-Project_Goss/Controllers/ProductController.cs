@@ -9,7 +9,15 @@ namespace BookProject.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Default
+        /// <summary>
+        ///     Displays a list of Products to the user. Allows user to search through the  list
+        ///     for all or with filters and sorts list either ascending or descending
+        /// </summary>
+        /// <param name="id"> search term - string </param>
+        /// <param name="filter"> filter selection - string </param>
+        /// <param name="sortBy"> sort column - int </param>
+        /// <param name="isDesc"> sort direction - boolean </param>
+        /// <returns> A list of Products that have been included </returns>
         public ActionResult AllProducts(string id, string filter = "All", int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -78,6 +86,12 @@ namespace BookProject.Controllers
             return View(products);
         }
 
+        /// <summary>
+        ///     grabs a specific Product by url and id, and redirects to an new page
+        ///     where an update can be made using the info grabbed from the id if it exists
+        /// </summary>
+        /// <param name="id"> string </param>
+        /// <returns> An update page with grabbed Product info </returns>
         [HttpGet]
         public ActionResult ProductUpsert(string id)
         {
@@ -92,6 +106,12 @@ namespace BookProject.Controllers
             return View(product);
         }
 
+        /// <summary>
+        ///     Gets the updated info from the update page, adds the new product to the list 
+        ///     and returns the list page with the updated information
+        /// </summary>
+        /// <param name="product"> product that is being updated </param>
+        /// <returns> Updated list view of products </returns>
         [HttpPost]
         public ActionResult ProductUpsert(Product product)
         {
@@ -125,6 +145,12 @@ namespace BookProject.Controllers
             return RedirectToAction("AllProducts");
         }
 
+        /// <summary>
+        ///     Soft deletes a product based on the id that is sent, and redirects back to 
+        ///     the list page with updated list of products
+        /// </summary>
+        /// <param name="id"> string </param>
+        /// <returns> List View with updated products </returns>
         [HttpGet]
         public ActionResult ProductDelete(string id)
         {
@@ -145,6 +171,14 @@ namespace BookProject.Controllers
             return RedirectToAction("AllProducts");
         }
 
+        /// <summary>
+        ///     Gets the sent id and filter and searches for Products that match the
+        ///     search value and returns an updated list
+        /// </summary>
+        /// <param name="id"> Value being filtered </param>
+        /// <param name="filter"> Section being filtered </param>
+        /// <param name="products"> List of products </param>
+        /// <returns> an updated list of products </returns>
         private List<Product> SearchProducts(string id, string filter, List<Product> products)
         {
             id = id.Trim().ToLower();

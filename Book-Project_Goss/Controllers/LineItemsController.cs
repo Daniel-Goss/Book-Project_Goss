@@ -9,7 +9,15 @@ namespace BookProject.Controllers
 {
     public class LineItemsController : Controller
     {
-        // GET: LineItems
+        /// <summary>
+        ///     Displays a list of LineItems to the user. Allows user to search through the  list
+        ///     for all or with filters and sorts list either ascending or descending
+        /// </summary>
+        /// <param name="id"> search term - string </param>
+        /// <param name="filter"> filter selection - string </param>
+        /// <param name="sortBy"> sort column - int </param>
+        /// <param name="isDesc"> sort direction - boolean </param>
+        /// <returns> A list of LineItems that have been included </returns>
         public ActionResult AllLineItems(string id, string filter = "All", int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -89,6 +97,13 @@ namespace BookProject.Controllers
             return View(lineItems);
         }
 
+        /// <summary>
+        ///     grabs a specific Line by url and id using two as there is a composite key, and redirects to an new page
+        ///     where an update can be preformed
+        /// </summary>
+        /// <param name="prodID"> string </param>
+        /// <param name="inID"> int </param>
+        /// <returns> Update View with grabed information </returns>
         [HttpGet]
         public ActionResult LineItemUpsert(string prodID, int inID)
         {
@@ -108,6 +123,12 @@ namespace BookProject.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Gets the updated info from the update page, adds the new lineItem to the list 
+        ///     and returns the list page with the updated information
+        /// </summary>
+        /// <param name="model"> model that is updating </param>
+        /// <returns> Updated list of info </returns>
         [HttpPost]
         public ActionResult LineItemUpsert(LineItemUpsertModel model)
         {
@@ -142,6 +163,13 @@ namespace BookProject.Controllers
             return RedirectToAction("AllLineItems");
         }
 
+        /// <summary>
+        ///     Soft deletes a LineItem based on the id that is sent, and redirects back to 
+        ///     the list page with an updated list of LineItems
+        /// </summary>
+        /// <param name="inID"> int </param>
+        /// <param name="prodID"> String </param>
+        /// <returns> Updated list view </returns>
         [HttpGet]
         public ActionResult LineItemDelete(int inID, string prodID)
         {
@@ -162,6 +190,14 @@ namespace BookProject.Controllers
             return RedirectToAction("AllLineItems");
         }
 
+        /// <summary>
+        ///     Gets the sent id and filter and searches for lineItems that match the
+        ///     search value and returns an updated list
+        /// </summary>
+        /// <param name="id"> Value being filtered </param>
+        /// <param name="filter"> Section being filtered </param>
+        /// <param name="lineItems"> List of Lineitems </param>
+        /// <returns> an updated list of LineItems </returns>
         private List<InvoiceLineItem> SearchLineItems(string id, string filter, List<InvoiceLineItem> lineItems)
         {
             id = id.Trim().ToLower();

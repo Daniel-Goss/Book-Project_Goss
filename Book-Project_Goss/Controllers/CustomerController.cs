@@ -9,7 +9,15 @@ namespace BookProject.Controllers
 {
     public class CustomerController : Controller
     {
-        // GET: Customer
+        /// <summary>
+        ///     Displays a list of Customers to the user. Allows user to search through the  list
+        ///     for all or with filters and sorts list either ascending or descending
+        /// </summary>
+        /// <param name="id"> string </param>
+        /// <param name="filter"> string </param>
+        /// <param name="sortBy"> int </param>
+        /// <param name="isDesc"> isDesc </param>
+        /// <returns> page/View with a list of Customers </returns>
         public ActionResult AllCustomers(string id, string filter = "all", int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -77,6 +85,12 @@ namespace BookProject.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        ///     Gets the update age for customers using a url based, and grabs a customer if
+        ///     a valid id is given and redirect to an update page with grabbed info
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> Upsert View </returns>
         [HttpGet]
         public ActionResult CustomerUpsert(int id)
         {
@@ -95,6 +109,12 @@ namespace BookProject.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Updates or adds a customer in the list of customers and redirects back to the original list
+        ///     View with updated info
+        /// </summary>
+        /// <param name="model"> model for update </param>
+        /// <returns> View wth updated List </returns>
         [HttpPost]
         public ActionResult CustomerUpsert(CustomerUpsertModel model)
         {
@@ -132,7 +152,12 @@ namespace BookProject.Controllers
             return RedirectToAction("AllCustomers");
         }
 
-
+        /// <summary>
+        ///     Soft deletes a customer based on the id that is sent, and redirects back to 
+        ///     the list page with updated list of customers
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> List View with updated customers </returns>
         [HttpGet]
         public ActionResult CustomerDelete(int id)
         {
